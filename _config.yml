@@ -1,0 +1,27 @@
+title: Bản tin của Điền
+description: Bản tin sáng tổng hợp thị trường và thời sự, cập nhật mỗi ngày.
+lang: vi
+timezone: Asia/Ho_Chi_Minh
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+# Mỗi số bản tin là một file trong thư mục _issues/, tên file YYYY-MM-DD.md
+collections:
+  issues:
+    output: true
+    permalink: /:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: issues
+    values:
+      layout: issue
+
+exclude:
+  - CLAUDE.md
+  - README.md
+  - .claude/

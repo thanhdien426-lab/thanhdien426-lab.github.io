@@ -1,0 +1,26 @@
+{% assign issue = include.issue %}
+{% assign all = site.issues | sort: "date" %}
+<article class="issue">
+  <header class="issue-head">
+    <p class="issue-date">{{ issue.date | date: "%d/%m/%Y" }}</p>
+    <h1>{{ issue.title }}</h1>
+    {% if issue.summary %}<p class="issue-summary">{{ issue.summary }}</p>{% endif %}
+  </header>
+
+  <div class="issue-content">
+    {{ issue.content }}
+  </div>
+
+  <p class="disclaimer">⚠️ Thông tin tham khảo, không phải khuyến nghị đầu tư.</p>
+
+  <nav class="issue-nav">
+    {% for doc in all %}
+      {% if doc.url == issue.url %}
+        {% assign prev_i = forloop.index0 | minus: 1 %}
+        {% assign next_i = forloop.index0 | plus: 1 %}
+        {% if prev_i >= 0 %}{% assign prev_doc = all[prev_i] %}<a class="prev" href="{{ prev_doc.url | relative_url }}">← Số {{ prev_doc.date | date: "%d/%m" }}</a>{% endif %}
+        {% if next_i < all.size %}{% assign next_doc = all[next_i] %}<a class="next" href="{{ next_doc.url | relative_url }}">Số {{ next_doc.date | date: "%d/%m" }} →</a>{% endif %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+</article>

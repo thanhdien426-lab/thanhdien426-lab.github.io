@@ -1,0 +1,27 @@
+---
+layout: default
+title: Lưu trữ
+permalink: /luu-tru/
+---
+<h1>🗂️ Lưu trữ các số</h1>
+{% assign issues = site.issues | sort: "date" | reverse %}
+{% assign current_month = "" %}
+{% for doc in issues %}
+  {% assign month = doc.date | date: "%m/%Y" %}
+  {% if month != current_month %}
+    {% unless forloop.first %}</ul>{% endunless %}
+    <h2 class="archive-month">Tháng {{ month }}</h2>
+    <ul class="archive-list">
+    {% assign current_month = month %}
+  {% endif %}
+  <li>
+    <a href="{{ doc.url | relative_url }}">
+      <span class="archive-date">{{ doc.date | date: "%d/%m/%Y" }}</span>
+      <span class="archive-title">{{ doc.title }}</span>
+    </a>
+    {% if doc.summary %}<p class="archive-summary">{{ doc.summary }}</p>{% endif %}
+  </li>
+  {% if forloop.last %}</ul>{% endif %}
+{% else %}
+  <p>Chưa có bản tin nào.</p>
+{% endfor %}

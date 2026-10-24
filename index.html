@@ -1,0 +1,10 @@
+---
+layout: default
+---
+{% assign latest = site.issues | sort: "date" | last %}
+{% if latest %}
+  <p class="latest-badge">Số mới nhất · <a href="{{ latest.url | relative_url }}">link riêng của số này</a></p>
+  {% include issue-body.html issue=latest %}
+{% else %}
+  <p>Chưa có bản tin nào.</p>
+{% endif %}
